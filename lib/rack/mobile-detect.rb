@@ -128,6 +128,8 @@ module Rack
       @redirect_to = options[:redirect_to]
       # A mapping of devices to redirect URLs, for targeted devices
       @redirect_map = options[:redirect_map]
+      # A URL that specifies a single redirect-url for any device non-mobile
+      @redirect_desktop_to = options[:redirect_desktop_to]
     end
 
     # Because the web app may be multithreaded, this method must
@@ -159,6 +161,8 @@ module Rack
           path = Rack::Utils.unescape(env['PATH_INFO'])
           return [301, {'Location' => redirect}, []] if redirect && path !~ /^#{redirect}/
         end
+      else
+        return [301, {'Location' => @redirect_desktop_to, 'Content-Type' => 'text/html'}, []] if @redirect_desktop_to
       end
 
       @app.call(env)
