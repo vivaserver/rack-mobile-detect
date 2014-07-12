@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'rake/testtask'
 
 begin
   require 'jeweler'
@@ -41,16 +42,20 @@ rescue LoadError
   end
 end
 
-task :test => :check_dependencies
-
 task :default => :test
 
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "rack-mobile-detect #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+Rake::TestTask.new do |t|
+  t.libs.push "lib"
+  t.test_files = FileList['test/*_spec.rb']
+  t.verbose = true
 end
+
+require 'rake/task'
+
+#Rake::RDocTask.new do |rdoc|
+  #version = File.exist?('VERSION') ? File.read('VERSION') : ""
+  #rdoc.rdoc_dir = 'rdoc'
+  #rdoc.title = "rack-mobile-detect #{version}"
+  #rdoc.rdoc_files.include('README*')
+  #rdoc.rdoc_files.include('lib/**/*.rb')
+#end

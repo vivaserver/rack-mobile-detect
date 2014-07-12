@@ -1,7 +1,6 @@
-require 'helper'
+require File.expand_path(File.dirname(__FILE__) + '/helper')
 
-class TestRackMobileDetect < Test::Unit::TestCase
-
+describe 'TestRackMobileDetect' do
   context "An app with mobile-device defaults" do
     setup do
       @app = test_app
@@ -183,8 +182,7 @@ class TestRackMobileDetect < Test::Unit::TestCase
       env = test_env({ 'HTTP_USER_AGENT' => 'some wap phone' })
       status, headers, body = @rack.call(env)
       assert_equal 'true', env[x_mobile]
-
-      assert_not_equal(301, status)
+      refute_equal 301, status
     end
   end
 
@@ -220,7 +218,6 @@ class TestRackMobileDetect < Test::Unit::TestCase
       assert_equal(301, status)
       assert_equal({'Location' => "http://m.example.com/genericdevice"}, headers)
     end
-
   end
 
 
