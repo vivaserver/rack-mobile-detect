@@ -11,8 +11,8 @@ begin
     X_MOBILE_DEVICE header to the request if a mobile device is detected. Specific
     devices can be targeted with custom Regexps and redirect support is available.}
     gem.email = "accounts@majortom.fastmail.us"
-    gem.homepage = "http://github.com/talison/rack-mobile-detect"
-    gem.authors = ["Tom Alison"]
+    gem.homepage = "http://github.com/vivaserver/rack-mobile-detect"
+    gem.authors = ["Tom Alison","Cristian R. Arroyo"]
     gem.add_development_dependency("shoulda", ">= 0")
     gem.add_dependency("rack")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings

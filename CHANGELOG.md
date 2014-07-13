@@ -1,3 +1,8 @@
+### 0.4.1: Jul 13, 2014 ###
+* Added redirect_desktop_to: option with passing tests
+* Merged Darren Cauthon's fork to allow tests to run with `rake test`
+  (https://github.com/darrencauthon/rack-mobile-detect/tree/get_tests_running)
+
 ### 0.4.0: Jun 7, 2012 ###
 * Added iPad as a targeted device, thank you sansari (https://github.com/sansari)
 

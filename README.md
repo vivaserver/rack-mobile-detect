@@ -108,6 +108,10 @@ In the example above, BlackBerrys and iPhones get redirected to
 device-specific URLs. All other mobile devices get redirected to
 'http://m.example.com'.
 
+If for some reason, a non-mobile device (most likely a desktop computer) is to be redirected to a specific location, you can use the `redirect_desktop_to` option:
+
+    use Rack::MobileDetect, :redirect_desktop_to => 'http://www.example.com/'
+
 
 Utils
 =====

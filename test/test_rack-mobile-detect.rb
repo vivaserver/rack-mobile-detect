@@ -147,6 +147,22 @@ describe 'TestRackMobileDetect' do
     end
   end
 
+  context "An app with a custom desktop redirect" do
+    setup do
+      @app = test_app
+      # Custom redirect
+      @rack = Rack::MobileDetect.new(@app, :redirect_desktop_to => 'http://www.example.com/')
+    end
+
+    should "redirect to destkop website" do
+      env = test_env({ 'HTTP_USER_AGENT' => desktop })
+      status, headers, body = @rack.call(env)
+      assert_nil env[x_mobile]
+      assert_equal(301, status)
+      assert_equal({'Location' => "http://www.example.com/", 'Content-Type' => 'text/html'}, headers)
+    end
+  end
+
   context "An app with a custom redirect map" do
     setup do
       @app = test_app
@@ -227,6 +243,10 @@ describe 'TestRackMobileDetect' do
   end
 
   # User agents for testing
+  def desktop
+    'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:30.0) Gecko/20100101 Firefox/30.0'
+  end
+
   def ipad
     'Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10'
   end
